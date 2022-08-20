@@ -65,4 +65,4 @@ jobs:
       - name: Build project
         run: poetry build
       - name: Upload to pypi registry
-        run: twine upload --non-interactive --repository-url https://pypi.bjoernpetersen.net dist/*
+        run: poetry run twine upload --non-interactive --repository-url https://pypi.bjoernpetersen.net dist/*
