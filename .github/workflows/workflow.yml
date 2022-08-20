@@ -3,8 +3,11 @@ on: [ push ]
 
 jobs:
   lint:
+    strategy:
+      matrix:
+        pyversion: [ 3.10, 3.9 ]
+    container: python:${{ matrix.pyversion }}-slim
     runs-on: ubuntu-latest
-    container: python:3.10-slim
     steps:
       - name: Install Poetry
         run: pip install poetry
@@ -17,8 +20,11 @@ jobs:
           poetry run mypy src/
 
   test:
+    strategy:
+      matrix:
+        pyversion: [ 3.10, 3.9 ]
+    container: python:${{ matrix.pyversion }}-slim
     runs-on: ubuntu-latest
-    container: python:3.10-slim
     steps:
       - name: Install Poetry
         run: pip install poetry
@@ -49,7 +55,7 @@ jobs:
 
   publish_package:
     runs-on: ubuntu-latest
-    container: python:3.10-slim
+    container: python:3.9-slim
     needs:
       - lint
       - test
