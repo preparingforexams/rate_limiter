@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pendulum import DateTime
 
 from .. import RateLimitingRepo, Usage
@@ -22,8 +24,8 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
         context_id: str,
         user_id: str,
         utc_time: DateTime,
-        reference_id: str | None,
-        response_id: str | None,
+        reference_id: Optional[str],
+        response_id: Optional[str],
     ):
         if context_id not in self._usage_time_by_user:
             self._usage_time_by_user[context_id] = {}
