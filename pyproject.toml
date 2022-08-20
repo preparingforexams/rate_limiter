@@ -5,6 +5,9 @@ version = "1.0.1"
 authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
 
+[project.urls]
+repository = "https://github.com/preparingforexams/rate_limiter"
+
 [tool.poetry.dependencies]
 python = "^3.9"
 Deprecated = "^1.2.13"
