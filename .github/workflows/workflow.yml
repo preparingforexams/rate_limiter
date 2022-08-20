@@ -55,7 +55,7 @@ jobs:
       - test
     if: success() && github.ref == 'refs/heads/main'
     env:
-      TWINE_USERNAME: test
+      TWINE_USERNAME: rate_limiter
       TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
     steps:
       - name: Install Poetry
