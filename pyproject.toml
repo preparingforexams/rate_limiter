@@ -6,7 +6,7 @@ authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "~3.10"
+python = "^3.9"
 Deprecated = "^1.2.13"
 pendulum = "^2.0.0"
 
