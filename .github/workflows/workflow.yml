@@ -1,0 +1,68 @@
+name: Workflow
+on: [ push ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container: python:3.10-slim
+    steps:
+      - name: Install Poetry
+        run: pip install poetry
+      - uses: actions/checkout@v3
+      - run: poetry install
+      - name: Check coding standards
+        run: |
+          poetry run black --check src/
+          poetry run flake8 src/
+          poetry run mypy src/
+
+  test:
+    runs-on: ubuntu-latest
+    container: python:3.10-slim
+    steps:
+      - name: Install Poetry
+        run: pip install poetry
+      - uses: actions/checkout@v3
+      - run: poetry install
+      - name: Run tests
+        run: poetry run pytest src/
+
+
+  push_migrations_docker:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+      - test
+    if: success() && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the tagged Docker image
+        run: docker build -t ghcr.io/preparingforexams/rate-limiter-migrations:${GITHUB_SHA} migrations
+      - name: Push the tagged Docker image
+        run: docker push ghcr.io/preparingforexams/rate-limiter-migrations:${GITHUB_SHA}
+
+  publish_package:
+    runs-on: ubuntu-latest
+    container: python:3.10-slim
+    needs:
+      - lint
+      - test
+    if: success() && github.ref == 'refs/heads/main'
+    env:
+      TWINE_USERNAME: test
+      TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+    steps:
+      - name: Install Poetry
+        run: pip install poetry
+      - uses: actions/checkout@v3
+      - run: poetry install
+      - name: Build project
+        run: poetry build
+      - name: Upload to pypi registry
+        run: twine upload --non-interactive --repository-url https://pypi.bjoernpetersen.net dist/*
