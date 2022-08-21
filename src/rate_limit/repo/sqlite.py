@@ -6,7 +6,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import List, Generator
 
-from pendulum import DateTime
+import pendulum
 
 from .. import RateLimitingRepo, Usage
 
@@ -37,7 +37,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
         self,
         context_id: str,
         user_id: str,
-        utc_time: DateTime,
+        utc_time: pendulum.DateTime,
         reference_id: str | None,
         response_id: str | None,
     ):
@@ -83,7 +83,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
                 Usage(
                     context_id=context_id,
                     user_id=user_id,
-                    time=DateTime.utcfromtimestamp(row[0]),
+                    time=pendulum.from_timestamp(row[0]),
                     reference_id=row[1],
                     response_id=row[2],
                 )
