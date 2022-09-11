@@ -9,7 +9,7 @@
         "^\\.github/workflows/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "pip install (?<depName>[_a-z]+==(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+        "pip install (?<depName>[_a-z]+)==(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ]
     }
   ]
