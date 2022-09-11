@@ -100,7 +100,7 @@ class RateLimiter:
             limit=requested_history,
         )
         return self._policy.get_offending_usage(
-            at_time=at_time,
+            at_time=at_time.in_timezone(self._timezone),
             last_usages=[usage.in_timezone(self._timezone) for usage in history],
         )
 
