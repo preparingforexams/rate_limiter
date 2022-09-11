@@ -5,12 +5,12 @@ jobs:
   lint:
     strategy:
       matrix:
-        pyversion: [ "3.10", "3.9" ]
+        pyversion: [ "3.11", "3.10", "3.9" ]
     container: python:${{ matrix.pyversion }}-slim
     runs-on: ubuntu-latest
     steps:
       - name: Install Poetry
-        run: pip install poetry
+        run: pip install poetry==1.2.0
       - uses: actions/checkout@v3
       - run: poetry install
       - name: Check coding standards
@@ -22,12 +22,12 @@ jobs:
   test:
     strategy:
       matrix:
-        pyversion: [ "3.10", "3.9" ]
+        pyversion: [ "3.11", "3.10", "3.9" ]
     container: python:${{ matrix.pyversion }}-slim
     runs-on: ubuntu-latest
     steps:
       - name: Install Poetry
-        run: pip install poetry
+        run: pip install poetry==1.2.0
       - uses: actions/checkout@v3
       - run: poetry install
       - name: Run tests
@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Poetry
-        run: pip install poetry
+        run: pip install poetry==1.2.0
       - name: Use Poetry to read version
         run: |
           VERSION=$(poetry version --short)
