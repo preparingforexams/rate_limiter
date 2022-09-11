@@ -12,5 +12,13 @@
         "pip install (?<depName>[_a-z]+)==(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ]
     }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "^python$"
+      ],
+      "enabled": false
+    }
   ]
 }
