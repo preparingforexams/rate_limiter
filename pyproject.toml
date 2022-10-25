@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rate_limit"
 description = "Provides scaffolding for rate limited features"
-version = "1.0.3"
+version = "1.1.0"
 authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
 
