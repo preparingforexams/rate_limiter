@@ -74,17 +74,6 @@ class RateLimiter:
         self._repo = repo
         self._timezone = timezone or tz.timezone("Europe/Berlin")
 
-    @deprecated("Use get_offending_usage instead")
-    def can_use(
-        self, context_id: str | int, user_id: str | int, at_time: DateTime
-    ) -> bool:
-        offending_usage = self.get_offending_usage(
-            context_id=context_id,
-            user_id=user_id,
-            at_time=at_time,
-        )
-        return offending_usage is None
-
     def get_offending_usage(
         self,
         context_id: str | int,
@@ -111,7 +100,7 @@ class RateLimiter:
         time: DateTime,
         reference_id: str | None = None,
         response_id: str | None = None,
-    ):
+    ) -> None:
         context_id = str(context_id)
         user_id = str(user_id)
         utc_time = time.astimezone(tz.UTC)
