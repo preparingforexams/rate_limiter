@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rate_limit"
 description = "Provides scaffolding for rate limited features"
-version = "1.3.0"
+version = "1.4.0"
 authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
 
@@ -18,7 +18,6 @@ black = "^23.0.0"
 flake8 = "^6.0.0"
 mypy = "~1.4.0"
 pytest = "^7.1.2"
-twine = "^4.0.0"
 types-Deprecated = "^1.2.9"
 
 [build-system]
