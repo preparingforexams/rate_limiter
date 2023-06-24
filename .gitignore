@@ -12,3 +12,5 @@ dist/
 .env
 
 usages.db
+
+.tool-versions
