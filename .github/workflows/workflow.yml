@@ -72,8 +72,8 @@ jobs:
       - test
     if: success() && startsWith(github.ref, 'refs/tags/v')
     env:
-      TWINE_USERNAME: rate_limiter
-      TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      POETRY_HTTP_BASIC_PYPI_BJOERNPETERSEN_USERNAME: rate_limiter
+      POETRY_HTTP_BASIC_PYPI_BJOERNPETERSEN_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
     steps:
       - name: Install Poetry
         run: pip install poetry
@@ -82,4 +82,4 @@ jobs:
       - name: Build project
         run: poetry build
       - name: Upload to pypi registry
-        run: poetry run twine upload --non-interactive --repository-url https://pypi.bjoernpetersen.net dist/*
+        run: poetry publish -r pypi-bjoernpetersen
