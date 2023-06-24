@@ -6,7 +6,7 @@ from .. import RateLimitingRepo, Usage
 
 
 class InMemoryRateLimitingRepo(RateLimitingRepo):
-    def __init__(self):
+    def __init__(self) -> None:
         # TODO: this implementation should store more than one usage
         self._usage_time_by_user: dict[str, dict[str, Usage]] = {}
 
