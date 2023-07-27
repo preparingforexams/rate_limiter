@@ -4,7 +4,7 @@ import logging
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
-from typing import List, Generator
+from typing import Generator, List
 
 import pendulum
 
