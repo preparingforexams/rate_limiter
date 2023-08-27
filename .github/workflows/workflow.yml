@@ -75,8 +75,8 @@ jobs:
       - test
     if: success() && startsWith(github.ref_name, 'v')
     env:
-      POETRY_HTTP_BASIC_PYPI_BJOERNPETERSEN_USERNAME: rate_limiter
-      POETRY_HTTP_BASIC_PYPI_BJOERNPETERSEN_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      POETRY_HTTP_BASIC_PYPI_BS_USERNAME: rate_limiter
+      POETRY_HTTP_BASIC_PYPI_BS_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
     steps:
       - name: Install Poetry
         run: pip install poetry==1.6.1
@@ -85,4 +85,4 @@ jobs:
       - name: Build project
         run: poetry build
       - name: Upload to pypi registry
-        run: poetry publish -r pypi-bjoernpetersen
+        run: poetry publish -r pypi-bs

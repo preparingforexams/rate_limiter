@@ -1,5 +1,5 @@
 [virtualenvs]
 in-project = true
 
-[repositories.pypi-bjoernpetersen]
-url = " https://pypi.bjoernpetersen.net/"
+[repositories.pypi-bs]
+url = " https://pypi.blindfolded.surgery/"
