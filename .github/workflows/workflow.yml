@@ -40,7 +40,7 @@ jobs:
 
   push-migrations-container-image:
     runs-on: ubuntu-latest
-    if: success() && startsWith(github.ref_name, 'v')
+    if: success() && startsWith(github.ref, 'refs/tags/v')
     needs:
       - lint
       - test
@@ -73,7 +73,7 @@ jobs:
     needs:
       - lint
       - test
-    if: success() && startsWith(github.ref_name, 'v')
+    if: success() && startsWith(github.ref, 'refs/tags/v')
     env:
       POETRY_HTTP_BASIC_PYPI_BS_USERNAME: rate_limiter
       POETRY_HTTP_BASIC_PYPI_BS_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
