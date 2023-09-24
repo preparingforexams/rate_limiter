@@ -75,7 +75,7 @@ jobs:
       - test
     if: success() && startsWith(github.ref, 'refs/tags/v')
     env:
-      POETRY_HTTP_BASIC_PYPI_BS_USERNAME: rate_limiter
+      POETRY_HTTP_BASIC_PYPI_BS_USERNAME: ${{ vars.PYPI_USERNAME }}
       POETRY_HTTP_BASIC_PYPI_BS_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
     steps:
       - name: Install Poetry
