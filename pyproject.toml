@@ -9,7 +9,7 @@ license = "MIT"
 repository = "https://github.com/preparingforexams/rate_limiter"
 
 [tool.poetry.dependencies]
-python = ">=3.9 <3.12"
+python = ">=3.9 <3.13"
 Deprecated = "^1.2.13"
 pendulum = "^2.0.0"
 
