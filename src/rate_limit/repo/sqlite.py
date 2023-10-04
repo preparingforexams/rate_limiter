@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import sqlite3
 from contextlib import contextmanager
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Generator, List
 
@@ -82,7 +82,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
                 Usage(
                     context_id=context_id,
                     user_id=user_id,
-                    time=datetime.fromtimestamp(row[0]),
+                    time=datetime.fromtimestamp(row[0], tz=timezone.utc),
                     reference_id=row[1],
                     response_id=row[2],
                 )

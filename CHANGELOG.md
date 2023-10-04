@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+
+### Fixed
+
+- Never create timezone-naive datetimes
+
 ## 2.0.0
 
 ### Breaking Changes
