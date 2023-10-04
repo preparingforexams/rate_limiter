@@ -1,16 +1,16 @@
+from datetime import datetime
 from typing import Callable
 
 import pytest
-from pendulum import DateTime
 
 from rate_limit import Usage
 
 
 @pytest.fixture()
-def create_usage() -> Callable[[DateTime], Usage]:
+def create_usage() -> Callable[[datetime], Usage]:
     id_counter = 0
 
-    def _create_usage(time: DateTime) -> Usage:
+    def _create_usage(time: datetime) -> Usage:
         nonlocal id_counter
         current_id = id_counter
         id_counter += 1

@@ -11,7 +11,7 @@ repository = "https://github.com/preparingforexams/rate_limiter"
 [tool.poetry.dependencies]
 python = ">=3.9 <3.13"
 Deprecated = "^1.2.13"
-pendulum = "^2.0.0"
+tzdata = "2023.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.0.0"

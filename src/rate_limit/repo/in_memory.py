@@ -1,6 +1,5 @@
+from datetime import datetime
 from typing import Optional
-
-from pendulum import DateTime
 
 from .. import RateLimitingRepo, Usage
 
@@ -23,7 +22,7 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
         self,
         context_id: str,
         user_id: str,
-        utc_time: DateTime,
+        utc_time: datetime,
         reference_id: Optional[str],
         response_id: Optional[str],
     ):

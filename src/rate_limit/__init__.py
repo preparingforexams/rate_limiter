@@ -2,24 +2,25 @@ from __future__ import annotations
 
 import abc
 from dataclasses import dataclass
+from datetime import datetime, tzinfo
+from datetime import timezone as dt_timezone
 
-from pendulum import DateTime, tz
-from pendulum.tz.timezone import Timezone
+from zoneinfo import ZoneInfo
 
 
 @dataclass(frozen=True)
 class Usage:
     context_id: str
     user_id: str
-    time: DateTime
+    time: datetime
     reference_id: str | None
     response_id: str | None
 
-    def in_timezone(self, timezone: Timezone) -> Usage:
+    def in_timezone(self, timezone: tzinfo) -> Usage:
         return Usage(
             context_id=self.context_id,
             user_id=self.user_id,
-            time=self.time.in_timezone(timezone),
+            time=self.time.astimezone(timezone),
             reference_id=self.reference_id,
             response_id=self.response_id,
         )
@@ -34,7 +35,7 @@ class RateLimitingPolicy(abc.ABC):
     @abc.abstractmethod
     def get_offending_usage(
         self,
-        at_time: DateTime,
+        at_time: datetime,
         last_usages: list[Usage],
     ) -> Usage | None:
         pass
@@ -46,7 +47,7 @@ class RateLimitingRepo(abc.ABC):
         self,
         context_id: str,
         user_id: str,
-        utc_time: DateTime,
+        utc_time: datetime,
         reference_id: str | None,
         response_id: str | None,
     ):
@@ -67,17 +68,17 @@ class RateLimiter:
         self,
         policy: RateLimitingPolicy,
         repo: RateLimitingRepo,
-        timezone: Timezone | None = None,
+        timezone: tzinfo | None = None,
     ):
         self._policy = policy
         self._repo = repo
-        self._timezone = timezone or tz.timezone("Europe/Berlin")
+        self._timezone = timezone or ZoneInfo("Europe/Berlin")
 
     def get_offending_usage(
         self,
         context_id: str | int,
         user_id: str | int,
-        at_time: DateTime,
+        at_time: datetime,
     ) -> Usage | None:
         context_id = str(context_id)
         user_id = str(user_id)
@@ -88,7 +89,7 @@ class RateLimiter:
             limit=requested_history,
         )
         return self._policy.get_offending_usage(
-            at_time=at_time.in_timezone(self._timezone),
+            at_time=at_time.astimezone(self._timezone),
             last_usages=[usage.in_timezone(self._timezone) for usage in history],
         )
 
@@ -96,13 +97,13 @@ class RateLimiter:
         self,
         context_id: str | int,
         user_id: str | int,
-        time: DateTime,
+        time: datetime,
         reference_id: str | None = None,
         response_id: str | None = None,
     ) -> None:
         context_id = str(context_id)
         user_id = str(user_id)
-        utc_time = time.astimezone(tz.UTC)
+        utc_time = time.astimezone(dt_timezone.utc)
         self._repo.add_usage(
             context_id=context_id,
             user_id=user_id,
