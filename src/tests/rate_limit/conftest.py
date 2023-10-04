@@ -1,50 +1,49 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, tzinfo
 
 import pytest
-from pendulum import DateTime, tz
-from pendulum.tz.timezone import Timezone
+from zoneinfo import ZoneInfo
 
 
 @pytest.fixture()
-def timezone() -> Timezone:
-    return tz.timezone("Europe/Berlin")
+def timezone() -> tzinfo:
+    return ZoneInfo("Europe/Berlin")
 
 
 @pytest.fixture()
-def now(timezone) -> DateTime:
-    return DateTime.now(timezone)
+def now(timezone) -> datetime:
+    return datetime.now(timezone)
 
 
 @pytest.fixture()
-def earlier_today(timezone) -> DateTime:
-    return DateTime.now(timezone) - timedelta(minutes=1)
+def earlier_today(timezone) -> datetime:
+    return datetime.now(timezone) - timedelta(minutes=1)
 
 
 @pytest.fixture()
-def later_today(timezone) -> DateTime:
-    result = DateTime.now(timezone) + timedelta(minutes=1)
-    return result  # type: ignore
+def later_today(timezone) -> datetime:
+    result = datetime.now(timezone) + timedelta(minutes=1)
+    return result
 
 
 @pytest.fixture()
-def yesterday(timezone) -> DateTime:
-    yesterday_exact: DateTime = DateTime.now(timezone) - timedelta(days=1)
+def yesterday(timezone) -> datetime:
+    yesterday_exact: datetime = datetime.now(timezone) - timedelta(days=1)
     result = yesterday_exact.replace(
         hour=23,
         minute=59,
         second=33,
         microsecond=0,
     )
-    return result  # type: ignore
+    return result
 
 
 @pytest.fixture()
-def tomorrow(timezone) -> DateTime:
-    yesterday_exact = DateTime.now(timezone) + timedelta(days=1)
+def tomorrow(timezone) -> datetime:
+    yesterday_exact = datetime.now(timezone) + timedelta(days=1)
     result = yesterday_exact.replace(
         hour=0,
         minute=0,
         second=0,
         microsecond=0,
     )
-    return result  # type: ignore
+    return result

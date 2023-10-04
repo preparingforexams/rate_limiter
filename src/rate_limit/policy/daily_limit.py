@@ -1,7 +1,6 @@
 import logging
+from datetime import datetime
 from typing import Optional
-
-from pendulum import DateTime
 
 from .. import RateLimitingPolicy, Usage
 
@@ -22,7 +21,7 @@ class DailyLimitRateLimitingPolicy(RateLimitingPolicy):
 
     def get_offending_usage(
         self,
-        at_time: DateTime,
+        at_time: datetime,
         last_usages: list[Usage],
     ) -> Optional[Usage]:
         if len(last_usages) > self._limit:
