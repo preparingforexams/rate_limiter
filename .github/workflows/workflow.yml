@@ -6,11 +6,15 @@ on:
       - v**
   pull_request: { }
 
+env:
+  COVERAGE_VERSION: "3.12"
+  MIN_VERSION: "3.10"
+
 jobs:
   lint:
     strategy:
       matrix:
-        pyversion: [ "3.11", "3.10", "3.9" ]
+        pyversion: [ "3.12", "3.11", "3.10" ]
     container: python:${{ matrix.pyversion }}-slim
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +31,7 @@ jobs:
   test:
     strategy:
       matrix:
-        pyversion: [ "3.11", "3.10", "3.9" ]
+        pyversion: [ "3.12", "3.11", "3.10" ]
     container: python:${{ matrix.pyversion }}-slim
     runs-on: ubuntu-latest
     steps:
@@ -36,7 +40,22 @@ jobs:
       - uses: actions/checkout@v4
       - run: poetry install
       - name: Run tests
-        run: poetry run pytest src/
+        run: |
+          if [ "${{ matrix.pyversion }}" = "${{ env.COVERAGE_VERSION }}" ]
+          then
+            poetry run pytest --cov src/
+          else
+            poetry run pytest src/
+          fi
+      - name: Convert Python coverage file format to XML
+        if: matrix.pyversion == env.COVERAGE_VERSION
+        run: poetry run coverage xml
+      - name: Upload coverage reports to Codecov
+        if: matrix.pyversion == env.COVERAGE_VERSION
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
 
   push-migrations-container-image:
     runs-on: ubuntu-latest
@@ -69,7 +88,7 @@ jobs:
 
   publish_package:
     runs-on: ubuntu-latest
-    container: python:3.9-slim
+    container: python:${{ env.MIN_VERSION }}-slim
     needs:
       - lint
       - test

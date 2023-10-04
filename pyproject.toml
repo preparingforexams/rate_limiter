@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "rate_limit"
 description = "Provides scaffolding for rate limited features"
-version = "1.5.1"
-authors = ["OpenAlcoholics <team@openalcoholics.group>"]
+version = "2.0.0"
+authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
 license = "MIT"
 
 [project.urls]
@@ -15,8 +15,10 @@ pendulum = "^2.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.0.0"
+coverage = { extras = ["toml"], version = "^7.3.1" }
 mypy = "^1.4.0"
 pytest = "^7.1.2"
+pytest-cov = "^4.1.0"
 ruff = "0.0.292"
 types-Deprecated = "^1.2.9"
 
