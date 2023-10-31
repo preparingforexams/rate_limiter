@@ -1,4 +1,4 @@
-FROM flyway/flyway:9.22
+FROM flyway/flyway:10.0
 
 COPY sql /flyway/sql
 COPY flyway.conf /flyway/conf
