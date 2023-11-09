@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "rate_limit"
 description = "Provides scaffolding for rate limited features"
-version = "2.0.1"
+version = "2.1.0"
 authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
 license = "MIT"
 
