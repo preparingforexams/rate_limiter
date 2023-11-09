@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0
+
+### Features
+
+- Add default CMD to migration image (`flyway migrate -skipCheckForUpdate`)
+- Updated to Flyway 10
+
 ## 2.0.1
 
 ### Fixed
