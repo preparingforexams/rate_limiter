@@ -1,5 +1,15 @@
 # Changelog
 
+## v3.0.0 (2023-11-10)
+
+### BREAKING CHANGE
+
+- This release drops support for Python 3.10
+
+### Fix
+
+- Add migration location explicitly to config
+
 ## 2.1.0
 
 ### Features
