@@ -3,7 +3,7 @@ from typing import Callable
 
 import pytest
 
-from rate_limit import Usage
+from rate_limiter import Usage
 
 
 @pytest.fixture()

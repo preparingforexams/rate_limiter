@@ -1,6 +1,6 @@
 import pytest
 
-from rate_limit.policy.daily_limit import DailyLimitRateLimitingPolicy
+from rate_limiter.policy.daily_limit import DailyLimitRateLimitingPolicy
 
 
 @pytest.mark.parametrize(

@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "rate_limit"
+name = "prep-rate-limiter"
 description = "Provides scaffolding for rate limited features"
 version = "3.0.0"
 authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
 license = "MIT"
+packages = [{ from = "src", include = "rate_limiter" }]
 
 [project.urls]
 repository = "https://github.com/preparingforexams/rate_limiter"
@@ -41,4 +42,4 @@ extend-select = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["rate_limit"]
+known-first-party = ["rate_limiter"]
