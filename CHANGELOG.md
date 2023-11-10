@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.0.0 (2023-11-10)
+
+### BREAKING CHANGE
+
+- This version changes the pip package name to
+prep-rate-limiter and the Python package name to rate_limiter.
+
 ## v3.0.0 (2023-11-10)
 
 ### BREAKING CHANGE
