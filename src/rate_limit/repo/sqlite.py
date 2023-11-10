@@ -1,11 +1,9 @@
-from __future__ import annotations
-
 import logging
 import sqlite3
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Generator, List
+from typing import Generator, List, Self
 
 from .. import RateLimitingRepo, Usage
 
@@ -17,7 +15,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
         self._connection = connection
 
     @classmethod
-    def connect(cls, db_file: Path) -> SqliteRateLimitingRepo:
+    def connect(cls, db_file: Path) -> Self:
         if not db_file.is_file():
             raise ValueError(f"Database file {db_file} does not exist or is not a file")
         connection = sqlite3.connect(db_file)

@@ -1,9 +1,8 @@
-from __future__ import annotations
-
 import abc
 from dataclasses import dataclass
 from datetime import datetime, tzinfo
 from datetime import timezone as dt_timezone
+from typing import Self, cast
 
 from zoneinfo import ZoneInfo
 
@@ -16,14 +15,15 @@ class Usage:
     reference_id: str | None
     response_id: str | None
 
-    def in_timezone(self, timezone: tzinfo) -> Usage:
-        return Usage(
+    def in_timezone(self, timezone: tzinfo) -> Self:
+        usage = Usage(
             context_id=self.context_id,
             user_id=self.user_id,
             time=self.time.astimezone(timezone),
             reference_id=self.reference_id,
             response_id=self.response_id,
         )
+        return cast(Self, usage)
 
 
 class RateLimitingPolicy(abc.ABC):
