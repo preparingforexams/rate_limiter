@@ -1,7 +1,7 @@
 # Files and directories created by conventional Python tools.
 __pycache__
-.venv
-venv
+.venv*
+venv*
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
