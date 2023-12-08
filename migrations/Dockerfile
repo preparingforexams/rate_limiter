@@ -1,4 +1,4 @@
-FROM flyway/flyway:10.1
+FROM flyway/flyway:10.2
 
 COPY sql /flyway/sql
 COPY flyway.toml /flyway/conf
