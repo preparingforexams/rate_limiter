@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.2 (2023-12-28)
+
+### Fix
+
+- **otel**: Use return value of instrument_connection
+
 ## v4.1.1 (2023-12-28)
 
 ### Fix
