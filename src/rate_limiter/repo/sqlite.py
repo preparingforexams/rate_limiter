@@ -12,6 +12,13 @@ _LOG = logging.getLogger(__name__)
 
 class SqliteRateLimitingRepo(RateLimitingRepo):
     def __init__(self, connection: sqlite3.Connection):
+        try:
+            from opentelemetry.instrumentation.sqlite3 import SQLite3Instrumentor
+
+            SQLite3Instrumentor.instrument_connection(connection)
+        except ImportError:
+            pass
+
         self._connection = connection
 
     @classmethod

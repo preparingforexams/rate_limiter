@@ -9,9 +9,17 @@ packages = [{ from = "src", include = "rate_limiter" }]
 [project.urls]
 repository = "https://github.com/preparingforexams/rate_limiter"
 
+[tool.poetry.extras]
+opentelemetry = [
+    "opentelemetry-api",
+    "opentelemetry-instrumentation-sqlite3",
+]
+
 [tool.poetry.dependencies]
 python = ">=3.11 <3.13"
 Deprecated = "^1.2.13"
+opentelemetry-api = { version = "^1.22.0", optional = true }
+opentelemetry-instrumentation-sqlite3 = { version = "*", optional = true }
 tzdata = "2023.3"
 
 [tool.poetry.group.dev.dependencies]
