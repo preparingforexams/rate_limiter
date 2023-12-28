@@ -17,7 +17,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
 
             SQLite3Instrumentor.instrument_connection(connection)
         except ImportError:
-            pass
+            _LOG.info("Not instrumenting sqlite3 connection")
 
         self._connection = connection
 
