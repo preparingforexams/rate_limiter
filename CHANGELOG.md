@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.1.0 (2023-12-28)
+
+### Feat
+
+- Start new otel span for top-level RateLimiter methods
+- Add optional OpenTelemetry instrumentation
+
 ## v4.0.0 (2023-11-10)
 
 ### BREAKING CHANGE
