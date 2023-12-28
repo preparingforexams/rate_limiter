@@ -541,7 +541,7 @@ setuptools = "*"
 name = "opentelemetry-api"
 version = "1.22.0"
 description = "OpenTelemetry Python API"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "opentelemetry_api-1.22.0-py3-none-any.whl", hash = "sha256:43621514301a7e9f5d06dd8013a1b450f30c2e9372b8e30aaeb4562abf2ce034"},
@@ -1029,9 +1029,9 @@ docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.link
 testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-ignore-flaky", "pytest-mypy (>=0.9.1)", "pytest-ruff"]
 
 [extras]
-opentelemetry = ["opentelemetry-api", "opentelemetry-instrumentation-sqlite3"]
+opentelemetry = ["opentelemetry-instrumentation-sqlite3"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11 <3.13"
-content-hash = "ec6e626c8f02be2f167971a868f78faaf93d9694a8f21f5b11c621de469e885a"
+content-hash = "0eb0ba851f09da24b9a69b186336b7b199534dc65c25ffc4b855dd767039723f"
