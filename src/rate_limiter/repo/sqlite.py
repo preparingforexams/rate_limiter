@@ -15,7 +15,9 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
         try:
             from opentelemetry.instrumentation.sqlite3 import SQLite3Instrumentor
 
-            SQLite3Instrumentor.instrument_connection(connection)
+            connection = SQLite3Instrumentor().instrument_connection(
+                connection,
+            )
         except ImportError:
             _LOG.info("Not instrumenting sqlite3 connection")
 
