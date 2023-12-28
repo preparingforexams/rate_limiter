@@ -4,7 +4,10 @@ from datetime import datetime, tzinfo
 from datetime import timezone as dt_timezone
 from typing import Self, cast
 
+from opentelemetry import trace
 from zoneinfo import ZoneInfo
+
+_tracer = trace.get_tracer(__name__)
 
 
 @dataclass(frozen=True)
@@ -80,18 +83,19 @@ class RateLimiter:
         user_id: str | int,
         at_time: datetime,
     ) -> Usage | None:
-        context_id = str(context_id)
-        user_id = str(user_id)
-        requested_history = self._policy.requested_history
-        history = self._repo.get_usages(
-            context_id=context_id,
-            user_id=user_id,
-            limit=requested_history,
-        )
-        return self._policy.get_offending_usage(
-            at_time=at_time.astimezone(self._timezone),
-            last_usages=[usage.in_timezone(self._timezone) for usage in history],
-        )
+        with _tracer.start_as_current_span("get_offending_usage"):
+            context_id = str(context_id)
+            user_id = str(user_id)
+            requested_history = self._policy.requested_history
+            history = self._repo.get_usages(
+                context_id=context_id,
+                user_id=user_id,
+                limit=requested_history,
+            )
+            return self._policy.get_offending_usage(
+                at_time=at_time.astimezone(self._timezone),
+                last_usages=[usage.in_timezone(self._timezone) for usage in history],
+            )
 
     def add_usage(
         self,
@@ -101,13 +105,14 @@ class RateLimiter:
         reference_id: str | None = None,
         response_id: str | None = None,
     ) -> None:
-        context_id = str(context_id)
-        user_id = str(user_id)
-        utc_time = time.astimezone(dt_timezone.utc)
-        self._repo.add_usage(
-            context_id=context_id,
-            user_id=user_id,
-            utc_time=utc_time,
-            reference_id=reference_id,
-            response_id=response_id,
-        )
+        with _tracer.start_as_current_span("add_usage"):
+            context_id = str(context_id)
+            user_id = str(user_id)
+            utc_time = time.astimezone(dt_timezone.utc)
+            self._repo.add_usage(
+                context_id=context_id,
+                user_id=user_id,
+                utc_time=utc_time,
+                reference_id=reference_id,
+                response_id=response_id,
+            )
