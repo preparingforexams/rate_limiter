@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.1 (2023-12-28)
+
+### Fix
+
+- Log info if sqlite is not instrumented
+
 ## v4.1.0 (2023-12-28)
 
 ### Feat
