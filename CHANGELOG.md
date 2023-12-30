@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.1.3 (2023-12-30)
+
+### Fix
+
+- Don't pin tzdata
+
 ## v4.1.2 (2023-12-28)
 
 ### Fix
