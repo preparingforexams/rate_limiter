@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.2.0 (2024-03-10)
+
+### Feat
+
+- Introduce arm64 image
+
 ## v4.1.3 (2023-12-30)
 
 ### Fix
