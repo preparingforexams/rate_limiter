@@ -92,6 +92,7 @@ jobs:
       context: '{{defaultContext}}:migrations'
       digest-artifact-name: digests
       platform: "linux/${{ matrix.platform }}"
+      push-image: true
       image-name: rate-limiter-migrations
       version: ${{ needs.extract-version.version }}
       tag-suffix: -${{ matrix.platform }}
