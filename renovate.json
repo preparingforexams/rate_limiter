@@ -4,10 +4,28 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": [
+      "matchDepNames": [
         "python"
       ],
       "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "flyway/flyway"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "semanticCommitType": "fix"
+    },
+    {
+      "matchPackageNames": [
+        "flyway/flyway"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "semanticCommitType": "feat!"
     }
   ]
 }
