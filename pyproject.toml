@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "prep-rate-limiter"
 description = "Provides scaffolding for rate limited features"
-version = "4.2.0"
+version = "4.2.1"
 authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
 license = "MIT"
 packages = [{ from = "src", include = "rate_limiter" }]

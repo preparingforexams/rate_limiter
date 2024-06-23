@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.2.1 (2024-06-23)
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v10.15
+- **deps**: update flyway/flyway docker tag to v10.14
+- **deps**: update flyway/flyway docker tag to v10.12
+
 ## v4.2.0 (2024-03-10)
 
 ### Feat
