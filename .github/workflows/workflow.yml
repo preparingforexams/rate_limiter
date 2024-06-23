@@ -63,7 +63,6 @@ jobs:
 
   extract-version:
     runs-on: ubuntu-latest
-    if: success() && startsWith(github.ref, 'refs/tags/v')
     outputs:
       version: ${{ steps.extract.outputs.version }}
     steps:
@@ -77,7 +76,6 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
   build-migrations-container-image:
-    if: success() && startsWith(github.ref, 'refs/tags/v')
     needs:
       - extract-version
       - lint
@@ -92,7 +90,7 @@ jobs:
       context: 'migrations'
       digest-artifact-name: digests
       runner-name-build: ${{ (matrix.platform == 'arm64') && 'warp-ubuntu-latest-arm64-2x' || 'ubuntu-latest' }}
-      push-image: true
+      push-image: ${{ startsWith(github.ref, 'refs/tags/v') }}
       image-name: rate-limiter-migrations
       version: ${{ needs.extract-version.outputs.version }}
       tag-suffix: -${{ matrix.platform }}
