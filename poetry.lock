@@ -997,9 +997,9 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 type = ["pytest-mypy"]
 
 [extras]
-opentelemetry = ["opentelemetry-instrumentation-sqlite3"]
+opentelemetry-sqlite3 = ["opentelemetry-instrumentation-sqlite3"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11 <3.13"
-content-hash = "4fa7685988bee25631140da079a3d55d9e28048c75145fd1b32c0d03c91f0ae1"
+content-hash = "4c596f21e16a3a3388022d5e30c73def39ba6aac2c1c006a60fcef61cf697f83"
