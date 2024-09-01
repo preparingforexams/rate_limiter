@@ -8,7 +8,7 @@ _LOG = logging.getLogger(__name__)
 
 
 class DailyLimitRateLimitingPolicy(RateLimitingPolicy):
-    def __init__(self, limit: int = 1):
+    def __init__(self, *, limit: int = 1):
         if limit < 1:
             raise ValueError(
                 f"Limit may not be less than or equal to zero, but was {limit}"
@@ -21,6 +21,7 @@ class DailyLimitRateLimitingPolicy(RateLimitingPolicy):
 
     def get_offending_usage(
         self,
+        *,
         at_time: datetime,
         last_usages: list[Usage],
     ) -> Optional[Usage]:

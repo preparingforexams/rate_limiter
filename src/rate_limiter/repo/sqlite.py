@@ -41,6 +41,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
 
     def add_usage(
         self,
+        *,
         context_id: str,
         user_id: str,
         utc_time: datetime,
@@ -71,6 +72,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
 
     def get_usages(
         self,
+        *,
         context_id: str,
         user_id: str,
         limit: int = 1,

@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 _tracer = trace.get_tracer(__name__)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, kw_only=True)
 class Usage:
     context_id: str
     user_id: str
@@ -38,6 +38,7 @@ class RateLimitingPolicy(abc.ABC):
     @abc.abstractmethod
     def get_offending_usage(
         self,
+        *,
         at_time: datetime,
         last_usages: list[Usage],
     ) -> Usage | None:
@@ -48,6 +49,7 @@ class RateLimitingRepo(abc.ABC):
     @abc.abstractmethod
     def add_usage(
         self,
+        *,
         context_id: str,
         user_id: str,
         utc_time: datetime,
@@ -59,6 +61,7 @@ class RateLimitingRepo(abc.ABC):
     @abc.abstractmethod
     def get_usages(
         self,
+        *,
         context_id: str,
         user_id: str,
         limit: int = 1,
@@ -83,6 +86,7 @@ class RateLimiter:
 
     def get_offending_usage(
         self,
+        *,
         context_id: str | int,
         user_id: str | int,
         at_time: datetime,
@@ -103,6 +107,7 @@ class RateLimiter:
 
     def add_usage(
         self,
+        *,
         context_id: str | int,
         user_id: str | int,
         time: datetime,
