@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.0.4 (2024-09-01)
+
+### Fix
+
+- Don't import PostgresRateLimitingRepo if extra is not installed
+
 ## v5.0.3 (2024-09-01)
 
 ### Fix
