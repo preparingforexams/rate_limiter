@@ -36,3 +36,6 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
             reference_id=reference_id,
             response_id=response_id,
         )
+
+    def close(self) -> None:
+        pass

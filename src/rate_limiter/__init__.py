@@ -65,6 +65,10 @@ class RateLimitingRepo(abc.ABC):
     ) -> list[Usage]:
         pass
 
+    @abc.abstractmethod
+    def close(self) -> None:
+        pass
+
 
 class RateLimiter:
     def __init__(
@@ -116,3 +120,6 @@ class RateLimiter:
                 reference_id=reference_id,
                 response_id=response_id,
             )
+
+    def close(self) -> None:
+        self._repo.close()
