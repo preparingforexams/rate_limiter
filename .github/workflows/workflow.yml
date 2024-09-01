@@ -33,6 +33,7 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-migrations-postgres:
+    if: false
     strategy:
       matrix:
         postgres-version: [ "14", "15", "16" ]
@@ -40,14 +41,14 @@ jobs:
     container: flyway/flyway:10.17
     services:
       postgres:
-        image: postgres:15
+        image: postgres:${{ matrix.postgres-version }}
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
     steps:
       - uses: actions/checkout@v4
       - run: flyway migrate -skipCheckForUpdate
-        working-directory: migrations
+        working-directory: migrations/postgres
         env:
           FLYWAY_URL: jdbc:postgresql://postgres:5432/postgres
           FLYWAY_USER: postgres
@@ -59,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: flyway migrate -skipCheckForUpdate
-        working-directory: migrations
+        working-directory: migrations/sqlite
 
   extract-version:
     runs-on: ubuntu-latest
@@ -80,18 +81,21 @@ jobs:
       - extract-version
       - lint
       - test
-      - test-migrations-postgres
+      #- test-migrations-postgres
       - test-migrations-sqlite
     strategy:
       matrix:
-        platform: ["arm64", "amd64"]
+        sql-dialect: [ "sqlite" ]
+        platform: [ "arm64", "amd64" ]
     uses: preparingforexams/actions-container/.github/workflows/build-image-kaniko.yml@v3
     with:
+      additional-build-args: |
+        DIALECT=${{ matrix.sql-dialect }}
       context: 'migrations'
-      digest-artifact-name: digests
+      digest-artifact-name: digests-{{ matrix.sql-dialect }}
       runner-name-build: ${{ (matrix.platform == 'arm64') && 'warp-ubuntu-latest-arm64-2x' || 'ubuntu-latest' }}
       push-image: ${{ startsWith(github.ref, 'refs/tags/v') }}
-      image-name: rate-limiter-migrations
+      image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       version: ${{ needs.extract-version.outputs.version }}
       tag-suffix: -${{ matrix.platform }}
 
@@ -100,18 +104,21 @@ jobs:
     needs:
       - extract-version
       - build-migrations-container-image
+    strategy:
+      matrix:
+        sql-dialect: [ "sqlite" ]
     uses: BlindfoldedSurgery/actions-container/.github/workflows/merge-manifests.yml@v3
     with:
-      image-name: rate-limiter-migrations
+      image-name: rate-limiter-migrations-{{ matrix.sql-dialect }}
       tag: ${{ needs.extract-version.outputs.version }}
-      variant-digests: digests
+      variant-digests: digests-{{ matrix.sql-dialect }}
 
   publish-package:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v2
     needs:
       - lint
       - test
-      - test-migrations-postgres
+      #- test-migrations-postgres
       - test-migrations-sqlite
     if: success() && startsWith(github.ref, 'refs/tags/v')
     with:

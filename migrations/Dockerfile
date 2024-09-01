@@ -1,6 +1,8 @@
 FROM flyway/flyway:10.17
 
-COPY sql /flyway/sql
-COPY flyway.toml /flyway/conf
+ARG DIALECT
+
+COPY $DIALECT/sql /flyway/sql
+COPY $DIALECT/flyway.toml /flyway/conf
 
 CMD [ "migrate", "-skipCheckForUpdate" ]
