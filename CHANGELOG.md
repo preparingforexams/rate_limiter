@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.0.5 (2024-09-01)
+
+### Fix
+
+- Allow creating new files using sqlite repo
+
 ## v5.0.4 (2024-09-01)
 
 ### Fix
