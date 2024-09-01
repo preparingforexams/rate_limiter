@@ -25,8 +25,8 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
 
     @classmethod
     def connect(cls, db_file: Path) -> Self:
-        if not db_file.is_file():
-            raise ValueError(f"Database file {db_file} does not exist or is not a file")
+        if db_file.exists() and not db_file.is_file():
+            raise ValueError(f"Database file {db_file} exists and is not a file")
         connection = sqlite3.connect(db_file)
         return cls(connection)
 
