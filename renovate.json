@@ -26,6 +26,13 @@
         "major"
       ],
       "semanticCommitType": "feat!"
+    },
+    {
+      "groupName": "psycopg",
+      "matchDepNames": [
+        "psycopg",
+        "psycopg_pool"
+      ]
     }
   ]
 }

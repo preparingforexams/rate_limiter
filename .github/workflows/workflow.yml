@@ -29,11 +29,11 @@ jobs:
     with:
       python-version: ${{ matrix.python-version }}
       submit-coverage: ${{ matrix.python-version == '3.11' }}
+      tests-selector: not local
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   test-migrations-postgres:
-    if: false
     strategy:
       matrix:
         postgres-version: [ "14", "15", "16" ]
@@ -81,11 +81,11 @@ jobs:
       - extract-version
       - lint
       - test
-      #- test-migrations-postgres
+      - test-migrations-postgres
       - test-migrations-sqlite
     strategy:
       matrix:
-        sql-dialect: [ "sqlite" ]
+        sql-dialect: [ "postgres", "sqlite" ]
         platform: [ "arm64", "amd64" ]
     uses: preparingforexams/actions-container/.github/workflows/build-image-kaniko.yml@v3
     with:
@@ -106,7 +106,7 @@ jobs:
       - build-migrations-container-image
     strategy:
       matrix:
-        sql-dialect: [ "sqlite" ]
+        sql-dialect: [ "postgres", "sqlite" ]
     uses: BlindfoldedSurgery/actions-container/.github/workflows/merge-manifests.yml@v3
     with:
       image-name: rate-limiter-migrations-{{ matrix.sql-dialect }}
@@ -118,7 +118,7 @@ jobs:
     needs:
       - lint
       - test
-      #- test-migrations-postgres
+      - test-migrations-postgres
       - test-migrations-sqlite
     if: success() && startsWith(github.ref, 'refs/tags/v')
     with:
