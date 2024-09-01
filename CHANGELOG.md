@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.0.1 (2024-09-01)
+
+### Fix
+
+- Correctly set container image name
+
 ## v5.0.0 (2024-09-01)
 
 ### BREAKING CHANGE
