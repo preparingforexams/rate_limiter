@@ -3,12 +3,16 @@ from contextlib import contextmanager
 from datetime import datetime
 from typing import Callable, Generator, List, Self
 
-import psycopg
-import psycopg_pool
-
 from .. import RateLimitingRepo, Usage
 
 _LOG = logging.getLogger(__name__)
+
+try:
+    import psycopg
+    import psycopg_pool
+except ImportError:
+    psycopg = None  # type: ignore
+    psycopg_pool = None  # type: ignore
 
 
 class PostgresRateLimitingRepo(RateLimitingRepo):
