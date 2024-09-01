@@ -92,7 +92,7 @@ jobs:
       additional-build-args: |
         DIALECT=${{ matrix.sql-dialect }}
       context: 'migrations'
-      digest-artifact-name: digests-{{ matrix.sql-dialect }}
+      digest-artifact-name: digests-${{ matrix.sql-dialect }}
       runner-name-build: ${{ (matrix.platform == 'arm64') && 'warp-ubuntu-latest-arm64-2x' || 'ubuntu-latest' }}
       push-image: ${{ startsWith(github.ref, 'refs/tags/v') }}
       image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
@@ -109,7 +109,7 @@ jobs:
         sql-dialect: [ "postgres", "sqlite" ]
     uses: BlindfoldedSurgery/actions-container/.github/workflows/merge-manifests.yml@v3
     with:
-      image-name: rate-limiter-migrations-{{ matrix.sql-dialect }}
+      image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       tag: ${{ needs.extract-version.outputs.version }}
       variant-digests: digests-{{ matrix.sql-dialect }}
 
