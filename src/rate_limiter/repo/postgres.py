@@ -128,3 +128,6 @@ class PostgresRateLimitingRepo(RateLimitingRepo):
         )
 
         return usages
+
+    def close(self) -> None:
+        self._pool.close()

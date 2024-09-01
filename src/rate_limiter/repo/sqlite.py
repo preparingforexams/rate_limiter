@@ -105,3 +105,6 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
         )
 
         return usages
+
+    def close(self) -> None:
+        self._connection.close()
