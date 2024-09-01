@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.0.3 (2024-09-01)
+
+### Fix
+
+- Make postgres module importable without postgres dependencies
+
 ## v5.0.2 (2024-09-01)
 
 ### Fix
