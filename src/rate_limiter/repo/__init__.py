@@ -1,5 +1,8 @@
 from .in_memory import InMemoryRateLimitingRepo
-from .postgres import PostgresRateLimitingRepo
+try:
+    from .postgres import PostgresRateLimitingRepo
+except ImportError:
+    PostgresRateLimitingRepo = None
 from .sqlite import SqliteRateLimitingRepo
 
 __all__ = [
