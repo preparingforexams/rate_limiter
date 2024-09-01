@@ -10,7 +10,7 @@ packages = [{ from = "src", include = "rate_limiter" }]
 repository = "https://github.com/preparingforexams/rate_limiter"
 
 [tool.poetry.extras]
-opentelemetry = [
+opentelemetry-sqlite3 = [
     "opentelemetry-instrumentation-sqlite3",
 ]
 
