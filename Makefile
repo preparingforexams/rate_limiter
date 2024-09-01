@@ -14,3 +14,14 @@ pre-commit:
 .PHONY: test
 test:
 	poetry run pytest src/
+
+.PHONY: migrations-postgres
+migrations-postgres:
+	cd migrations/postgres && flyway migrate
+
+.PHONY: migrations-sqlite
+migrations-sqlite:
+	cd migrations/sqlite &&	flyway migrate
+
+.PHONY: migrations
+migrations: migrations-postgres migrations-sqlite

@@ -2,6 +2,6 @@
 locations = ["filesystem:sql"]
 
 [environments.default]
-url = "jdbc:sqlite:../usages.db"
+url = "jdbc:sqlite:../../usages.db"
 user = ""
 password = ""
