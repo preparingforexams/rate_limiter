@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.0.2 (2024-09-01)
+
+### Fix
+
+- Fix digest name for container image merge
+
 ## v5.0.1 (2024-09-01)
 
 ### Fix
