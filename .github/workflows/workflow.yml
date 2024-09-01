@@ -111,7 +111,7 @@ jobs:
     with:
       image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       tag: ${{ needs.extract-version.outputs.version }}
-      variant-digests: digests-{{ matrix.sql-dialect }}
+      variant-digests: digests-${{ matrix.sql-dialect }}
 
   publish-package:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v2
