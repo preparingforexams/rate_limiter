@@ -24,7 +24,7 @@ def repo():
 
 @pytest.mark.local
 def test_no_usages(repo):
-    usages = repo.get_usages("context", "user")
+    usages = repo.get_usages(context_id="context", user_id="user")
     assert usages == []
 
 
@@ -39,7 +39,7 @@ def test_add_usage(repo):
         response_id="response",
     )
 
-    usages = repo.get_usages("context", "user")
+    usages = repo.get_usages(context_id="context", user_id="user")
     assert usages == [
         Usage(
             context_id="context",

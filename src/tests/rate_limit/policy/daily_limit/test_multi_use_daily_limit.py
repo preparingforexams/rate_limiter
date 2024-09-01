@@ -28,7 +28,7 @@ def test_get_offending_usages_pass(
 ):
     times = [request.getfixturevalue(name) for name in time_fixture_names]
     usages = [create_usage(time) for time in times]
-    offending_usage = policy.get_offending_usage(now, usages)
+    offending_usage = policy.get_offending_usage(at_time=now, last_usages=usages)
     assert offending_usage is None
 
 
@@ -43,7 +43,7 @@ def test_get_offending_usages_fail(
     earlier_usage = create_usage(earlier_today)
     earlier_usage2 = create_usage(earlier_today)
     offending_usage = policy.get_offending_usage(
-        now,
-        [later_usage, earlier_usage2, earlier_usage],
+        at_time=now,
+        last_usages=[later_usage, earlier_usage2, earlier_usage],
     )
     assert offending_usage == earlier_usage
