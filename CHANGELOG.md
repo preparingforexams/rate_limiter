@@ -1,5 +1,29 @@
 # Changelog
 
+## v5.0.0 (2024-09-01)
+
+### BREAKING CHANGE
+
+- All repo and policy implementations need to add the *
+after their method's self parameters. All invocations that used
+positional arguments before will now need to use kw args.
+- The added abstract close method on the RateLimitingRepo
+will break any existing custom implementations.
+- The migrations container image is now called
+`rate-limiter-migrations-sqlite`
+- The `opentelemetry` extra has been renamed to
+`opentelemetry-sqlite3`
+
+### Feat
+
+- Add close method to repos and RateLimiter
+- Add Postgres repo
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v10.17
+- **deps**: update flyway/flyway docker tag to v10.16
+
 ## v4.2.1 (2024-06-23)
 
 ### Fix
