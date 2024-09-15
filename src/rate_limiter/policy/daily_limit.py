@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime
-from typing import Optional
 
 from .. import RateLimitingPolicy, Usage
 
@@ -24,7 +23,7 @@ class DailyLimitRateLimitingPolicy(RateLimitingPolicy):
         *,
         at_time: datetime,
         last_usages: list[Usage],
-    ) -> Optional[Usage]:
+    ) -> Usage | None:
         if len(last_usages) > self._limit:
             raise ValueError(
                 f"Got more usages than the requested limit"

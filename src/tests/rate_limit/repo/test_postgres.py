@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -30,7 +30,7 @@ def test_no_usages(repo):
 
 @pytest.mark.local
 def test_add_usage(repo):
-    timestamp = datetime.now(timezone.utc)
+    timestamp = datetime.now(UTC)
     repo.add_usage(
         context_id="context",
         user_id="user",

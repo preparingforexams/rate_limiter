@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, tzinfo
+from zoneinfo import ZoneInfo
 
 import pytest
-from zoneinfo import ZoneInfo
 
 
 @pytest.fixture()
