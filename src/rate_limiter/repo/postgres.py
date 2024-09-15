@@ -1,7 +1,8 @@
 import logging
+from collections.abc import Callable, Generator
 from contextlib import contextmanager
 from datetime import datetime
-from typing import Callable, Generator, List, Self
+from typing import Self
 
 import psycopg
 import psycopg_pool
@@ -99,7 +100,7 @@ class PostgresRateLimitingRepo(RateLimitingRepo):
         context_id: str,
         user_id: str,
         limit: int = 1,
-    ) -> List[Usage]:
+    ) -> list[Usage]:
         with self._cursor() as cursor:
             result = cursor.execute(
                 """

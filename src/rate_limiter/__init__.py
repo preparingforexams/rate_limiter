@@ -1,11 +1,10 @@
 import abc
 from dataclasses import dataclass
-from datetime import datetime, tzinfo
-from datetime import timezone as dt_timezone
+from datetime import UTC, datetime, tzinfo
 from typing import Self, cast
+from zoneinfo import ZoneInfo
 
 from opentelemetry import trace
-from zoneinfo import ZoneInfo
 
 _tracer = trace.get_tracer(__name__)
 
@@ -117,7 +116,7 @@ class RateLimiter:
         with _tracer.start_as_current_span("add_usage"):
             context_id = str(context_id)
             user_id = str(user_id)
-            utc_time = time.astimezone(dt_timezone.utc)
+            utc_time = time.astimezone(UTC)
             self._repo.add_usage(
                 context_id=context_id,
                 user_id=user_id,

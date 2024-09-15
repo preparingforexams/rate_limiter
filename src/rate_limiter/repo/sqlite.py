@@ -1,9 +1,10 @@
 import logging
 import sqlite3
+from collections.abc import Generator
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Generator, List, Self
+from typing import Self
 
 from .. import RateLimitingRepo, Usage
 
@@ -76,7 +77,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
         context_id: str,
         user_id: str,
         limit: int = 1,
-    ) -> List[Usage]:
+    ) -> list[Usage]:
         with self._cursor() as cursor:
             result = cursor.execute(
                 """
@@ -91,7 +92,7 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
                 Usage(
                     context_id=context_id,
                     user_id=user_id,
-                    time=datetime.fromtimestamp(row[0], tz=timezone.utc),
+                    time=datetime.fromtimestamp(row[0], tz=UTC),
                     reference_id=row[1],
                     response_id=row[2],
                 )
