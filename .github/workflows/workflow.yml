@@ -16,7 +16,7 @@ jobs:
   lint:
     strategy:
       matrix:
-        python-version: [ "3.12", "3.11" ]
+        python-version: [ "3.13", "3.12", "3.11" ]
     uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v2
     with:
       python-version: ${{ matrix.python-version }}
@@ -24,7 +24,7 @@ jobs:
   test:
     strategy:
       matrix:
-        python-version: [ "3.12", "3.11" ]
+        python-version: [ "3.13", "3.12", "3.11" ]
     uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v2
     with:
       python-version: ${{ matrix.python-version }}

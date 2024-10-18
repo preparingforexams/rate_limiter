@@ -1,5 +1,5 @@
 [project]
-requires-python = ">=3.11, <3.13"
+requires-python = ">=3.11, <3.14"
 
 [tool.poetry]
 name = "prep-rate-limiter"
@@ -25,7 +25,7 @@ postgres = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11 <3.13"
+python = ">=3.11 <3.14"
 Deprecated = "^1.2.13"
 opentelemetry-api = "^1.22.0"
 opentelemetry-instrumentation-psycopg = { version = "*", optional = true }
