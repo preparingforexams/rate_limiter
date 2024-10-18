@@ -29,4 +29,5 @@ migrations: migrations-postgres migrations-sqlite
 .PHONY: release
 release:
 	poetry run cz bump
+	git push
 	git push --tags
