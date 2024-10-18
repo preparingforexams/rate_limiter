@@ -1,5 +1,17 @@
 # Changelog
 
+## v5.1.0 (2024-10-18)
+
+### Feat
+
+- Support Python 3.13
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v10.20
+- **deps**: update flyway/flyway docker tag to v10.19
+- **deps**: update flyway/flyway docker tag to v10.18
+
 ## v5.0.5 (2024-09-01)
 
 ### Fix
