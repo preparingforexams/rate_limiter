@@ -38,7 +38,7 @@ jobs:
       matrix:
         postgres-version: [ "14", "15", "16" ]
     runs-on: ubuntu-latest
-    container: flyway/flyway:10.20
+    container: flyway/flyway:10.21
     services:
       postgres:
         image: postgres:${{ matrix.postgres-version }}
@@ -56,7 +56,7 @@ jobs:
 
   test-migrations-sqlite:
     runs-on: ubuntu-latest
-    container: flyway/flyway:10.20
+    container: flyway/flyway:10.21
     steps:
       - uses: actions/checkout@v4
       - run: flyway migrate -skipCheckForUpdate
