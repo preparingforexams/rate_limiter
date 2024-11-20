@@ -1,4 +1,4 @@
-FROM flyway/flyway:10.21
+FROM flyway/flyway:10.22
 
 LABEL org.opencontainers.image.source = "https://github.com/preparingforexams/rate_limiter"
 
