@@ -107,7 +107,7 @@ jobs:
     strategy:
       matrix:
         sql-dialect: [ "postgres", "sqlite" ]
-    uses: BlindfoldedSurgery/actions-container/.github/workflows/merge-manifests.yml@v3
+    uses: BlindfoldedSurgery/actions-container/.github/workflows/merge-manifests.yml@v4
     with:
       image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       tag: ${{ needs.extract-version.outputs.version }}
