@@ -41,7 +41,7 @@ mypy = "~1.13"
 pre-commit = "^4.0.0"
 pytest = "^8.0.0"
 pytest-cov = "^6.0.0"
-ruff = "0.8.0"
+ruff = "0.8.1"
 types-Deprecated = "^1.2.9"
 
 [build-system]
