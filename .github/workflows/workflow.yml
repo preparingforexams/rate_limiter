@@ -69,7 +69,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Poetry
-        run: pip install poetry==1.8.4
+        run: pip install poetry==1.8.5
       - name: Use Poetry to read version
         id: extract
         run: |
