@@ -7,8 +7,8 @@ on:
   pull_request: { }
 
 jobs:
-  validate-renovate-config:
-    uses: BlindfoldedSurgery/renovate-config/.github/workflows/validate.yml@main
+  required-meta:
+    uses: BlindfoldedSurgery/actions-meta/.github/workflows/required.yml@v1
 
   check-commits:
     uses: BlindfoldedSurgery/actions-releases/.github/workflows/commitizen-check.yml@v2
@@ -37,7 +37,7 @@ jobs:
     strategy:
       matrix:
         postgres-version: [ "14", "15", "16" ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: flyway/flyway:11.0
     services:
       postgres:
@@ -55,7 +55,7 @@ jobs:
           FLYWAY_PASSWORD: postgres
 
   test-migrations-sqlite:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: flyway/flyway:11.0
     steps:
       - uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
         working-directory: migrations/sqlite
 
   extract-version:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       version: ${{ steps.extract.outputs.version }}
     steps:
@@ -93,7 +93,7 @@ jobs:
         DIALECT=${{ matrix.sql-dialect }}
       context: 'migrations'
       digest-artifact-name: digests-${{ matrix.sql-dialect }}
-      runner-name-build: ${{ (matrix.platform == 'arm64') && 'warp-ubuntu-latest-arm64-2x' || 'ubuntu-latest' }}
+      runner-name-build: ${{ (matrix.platform == 'arm64') && 'warp-ubuntu-2404-arm64-2x' || 'ubuntu-24.04' }}
       push-image: ${{ startsWith(github.ref, 'refs/tags/v') }}
       image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       version: ${{ needs.extract-version.outputs.version }}
