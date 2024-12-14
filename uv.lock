@@ -460,7 +460,7 @@ wheels = [
 
 [[package]]
 name = "prep-rate-limiter"
-version = "5.1.0"
+version = "6.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "deprecated" },

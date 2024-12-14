@@ -57,6 +57,7 @@ include = [
 include = [
     "src/rate_limiter",
     "LICENSE",
+    "pyproject.toml",
 ]
 
 [tool.uv]
