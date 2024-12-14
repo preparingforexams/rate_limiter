@@ -1,5 +1,17 @@
 # Changelog
 
+## v6.0.0 (2024-12-14)
+
+### Feat
+
+- **deps**: Update flyway/flyway Docker tag to v11
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v11.1
+- **deps**: update flyway/flyway docker tag to v10.22
+- **deps**: update flyway/flyway docker tag to v10.21
+
 ## v5.1.0 (2024-10-18)
 
 ### Feat
