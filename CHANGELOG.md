@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.2 (2024-12-14)
+
+### Fix
+
+- attempt #2 to fix Hatch wheel
+
 ## v6.0.1 (2024-12-14)
 
 ### Fix
