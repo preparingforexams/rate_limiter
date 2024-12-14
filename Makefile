@@ -3,9 +3,9 @@ check: lint test
 
 .PHONY: lint
 lint:
-	poetry run ruff format src/
-	poetry run ruff check --fix --show-fixes src/
-	poetry run mypy src/
+	uv run ruff format src/
+	uv run ruff check --fix --show-fixes src/
+	uv run mypy src/
 
 .PHONY: pre-commit
 pre-commit:
@@ -13,7 +13,7 @@ pre-commit:
 
 .PHONY: test
 test:
-	poetry run pytest src/
+	uv run pytest src/
 
 .PHONY: migrations-postgres
 migrations-postgres:
@@ -28,6 +28,6 @@ migrations: migrations-postgres migrations-sqlite
 
 .PHONY: release
 release:
-	poetry run cz bump
+	uv run cz bump
 	git push
 	git push --tags
