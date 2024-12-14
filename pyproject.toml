@@ -52,13 +52,8 @@ include = [
     "pyproject.toml",
 ]
 
-
 [tool.hatch.build.targets.wheel]
-include = [
-    "src/rate_limiter",
-    "LICENSE",
-    "pyproject.toml",
-]
+packages = ["src/rate_limiter"]
 
 [tool.uv]
 publish-url = "https://pypi.bjoernpetersen.net/"
