@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.1 (2024-12-14)
+
+### Fix
+
+- Include pyproject.toml in wheel
+
 ## v6.0.0 (2024-12-14)
 
 ### Feat
