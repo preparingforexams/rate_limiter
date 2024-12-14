@@ -1,18 +1,22 @@
 [project]
 requires-python = ">=3.11, <3.14"
-
-[tool.poetry]
 name = "prep-rate-limiter"
 description = "Provides scaffolding for rate limited features"
 version = "5.1.0"
-authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
-license = "MIT"
-packages = [{ from = "src", include = "rate_limiter" }]
+authors = [{ name = "BlindfoldedSurgery", email = "team@blindfolded.surgery" }]
+readme = "README.md"
+classifiers = [
+    "Private :: Do Not Upload",
+    "License :: OSI Approved :: MIT License",
+]
 
-[project.urls]
-repository = "https://github.com/preparingforexams/rate_limiter"
+dependencies = [
+    "Deprecated >=1, <2",
+    "opentelemetry-api >=1.22, <2",
+    "tzdata",
+]
 
-[tool.poetry.extras]
+[project.optional-dependencies]
 opentelemetry-postgres = [
     "opentelemetry-instrumentation-psycopg",
 ]
@@ -20,36 +24,50 @@ opentelemetry-sqlite3 = [
     "opentelemetry-instrumentation-sqlite3",
 ]
 postgres = [
-    "psycopg",
-    "psycopg_pool",
+    "psycopg [binary] ==3.2.*",
+    "psycopg_pool ==3.2.*",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.11 <3.14"
-Deprecated = "^1.2.13"
-opentelemetry-api = "^1.22.0"
-opentelemetry-instrumentation-psycopg = { version = "*", optional = true }
-opentelemetry-instrumentation-sqlite3 = { version = "*", optional = true }
-psycopg = { version = "~3.2", extras = ["binary"], optional = true }
-psycopg_pool = { version = "~3.2", extras = ["binary"], optional = true }
-tzdata = "*"
+[project.urls]
+repository = "https://github.com/preparingforexams/rate_limiter"
 
-[tool.poetry.group.dev.dependencies]
-commitizen = "4.1.0"
-coverage = { extras = ["toml"], version = "^7.3.1" }
-mypy = "~1.13"
-pre-commit = "^4.0.0"
-pytest = "^8.0.0"
-pytest-cov = "^6.0.0"
-ruff = "0.8.3"
-types-Deprecated = "^1.2.9"
+[dependency-groups]
+dev = [
+    "commitizen ==4.1.0",
+    "coverage [toml] >=7, <8",
+    "mypy ==1.13.*",
+    "pre-commit >=4, <5",
+    "pytest >=8, <9",
+    "pytest-cov >=6, <7",
+    "ruff ==0.8.3",
+    "types-Deprecated >=1, <2",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/rate_limiter",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "src/rate_limiter",
+    "LICENSE",
+]
+
+[tool.uv]
+publish-url = "https://pypi.bjoernpetersen.net/"
 
 [build-system]
-requires = ["poetry-core>=1.2.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.commitizen]
-version_provider = "poetry"
+version_provider = "pep621"
 version_scheme = "semver"
 tag_format = "v$major.$minor.$patch"
 changelog_incremental = true
