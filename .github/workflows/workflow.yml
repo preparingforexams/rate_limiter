@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.13", "3.12", "3.11" ]
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v2
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v3
     with:
       build-tool: uv
       python-version: ${{ matrix.python-version }}
@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.13", "3.12", "3.11" ]
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v2
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v3
     with:
       build-tool: uv
       python-version: ${{ matrix.python-version }}
@@ -127,7 +127,7 @@ jobs:
       variant-digests: digests-${{ matrix.sql-dialect }}
 
   publish-package:
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v2
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v3
     needs:
       - lint
       - test
