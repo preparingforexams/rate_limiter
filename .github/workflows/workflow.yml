@@ -24,18 +24,20 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.13", "3.12", "3.11" ]
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v2
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v3
     with:
       build-tool: uv
+      cache-key-suffix: ${{ matrix.python-version }}
       python-version: ${{ matrix.python-version }}
 
   test:
     strategy:
       matrix:
         python-version: [ "3.13", "3.12", "3.11" ]
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v2
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v3
     with:
       build-tool: uv
+      cache-key-suffix: ${{ matrix.python-version }}
       python-version: ${{ matrix.python-version }}
       submit-coverage: ${{ matrix.python-version == '3.11' }}
       tests-selector: not local
@@ -82,6 +84,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
         with:
+          enable-cache: false
           version: ${{ env.UV_VERSION }}
       - name: Read version from pyproject.toml
         id: extract
@@ -127,7 +130,7 @@ jobs:
       variant-digests: digests-${{ matrix.sql-dialect }}
 
   publish-package:
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v2
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v3
     needs:
       - lint
       - test
@@ -136,6 +139,7 @@ jobs:
     if: success() && startsWith(github.ref, 'refs/tags/v')
     with:
       build-tool: uv
+      cache-key-suffix: '3.11'
       python-version: '3.11'
       pypi-username: ${{ vars.PYPI_USERNAME }}
     secrets:
