@@ -27,7 +27,6 @@ jobs:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v3
     with:
       build-tool: uv
-      cache-key-suffix: ${{ matrix.python-version }}
       python-version: ${{ matrix.python-version }}
 
   test:
@@ -37,7 +36,6 @@ jobs:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v3
     with:
       build-tool: uv
-      cache-key-suffix: ${{ matrix.python-version }}
       python-version: ${{ matrix.python-version }}
       submit-coverage: ${{ matrix.python-version == '3.11' }}
       tests-selector: not local
@@ -139,7 +137,6 @@ jobs:
     if: success() && startsWith(github.ref, 'refs/tags/v')
     with:
       build-tool: uv
-      cache-key-suffix: '3.11'
       python-version: '3.11'
       pypi-username: ${{ vars.PYPI_USERNAME }}
     secrets:
