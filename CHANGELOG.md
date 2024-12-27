@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.3 (2024-12-27)
+
+### Fix
+
+- Use non-root user for migrations
+
 ## v6.0.2 (2024-12-14)
 
 ### Fix
