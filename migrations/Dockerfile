@@ -4,6 +4,11 @@ LABEL org.opencontainers.image.source = "https://github.com/preparingforexams/ra
 
 ARG DIALECT
 
+RUN groupadd --system --gid 500 app \
+  && useradd --system --uid 500 --gid app --no-create-home app
+
+USER 500
+
 COPY $DIALECT/sql /flyway/sql
 COPY $DIALECT/flyway.toml /flyway/conf
 
