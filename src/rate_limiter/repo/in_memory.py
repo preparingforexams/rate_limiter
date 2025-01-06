@@ -38,5 +38,15 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
             response_id=response_id,
         )
 
+    def drop_old_usages(self, *, until: datetime) -> None:
+        for context in self._usage_time_by_user.values():
+            old = []
+            for user_id, usage in context.items():
+                if usage.time < until:
+                    old.append(user_id)
+
+            for user_id in old:
+                del context[user_id]
+
     def close(self) -> None:
         pass
