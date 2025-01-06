@@ -1,5 +1,11 @@
 # Changelog
 
+## v7.0.0 (2025-01-06)
+
+### Feat
+
+- Introduce retention time
+
 ## v6.1.0 (2025-01-06)
 
 ### Feat
