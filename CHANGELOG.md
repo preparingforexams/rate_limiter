@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.1.0 (2025-01-06)
+
+### Feat
+
+- Make SQLite usages table strict
+
 ## v6.0.3 (2024-12-27)
 
 ### Fix
