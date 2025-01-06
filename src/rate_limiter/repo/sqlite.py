@@ -109,5 +109,15 @@ class SqliteRateLimitingRepo(RateLimitingRepo):
 
         return usages
 
+    def drop_old_usages(self, *, until: datetime) -> None:
+        with self._cursor() as cursor:
+            cursor.execute(
+                """
+                DELETE FROM usages
+                WHERE time < ?
+                """,
+                [until.timestamp()],
+            )
+
     def close(self) -> None:
         self._connection.close()

@@ -1,11 +1,13 @@
 import abc
+import logging
 from dataclasses import dataclass
-from datetime import UTC, datetime, tzinfo
+from datetime import UTC, datetime, timedelta, tzinfo
 from typing import Self, cast
 from zoneinfo import ZoneInfo
 
 from opentelemetry import trace
 
+_logger = logging.getLogger(__name__)
 _tracer = trace.get_tracer(__name__)
 
 
@@ -68,6 +70,10 @@ class RateLimitingRepo(abc.ABC):
         pass
 
     @abc.abstractmethod
+    def drop_old_usages(self, *, until: datetime) -> None:
+        pass
+
+    @abc.abstractmethod
     def close(self) -> None:
         pass
 
@@ -78,9 +84,11 @@ class RateLimiter:
         policy: RateLimitingPolicy,
         repo: RateLimitingRepo,
         timezone: tzinfo | None = None,
+        retention_time: timedelta | None = None,
     ):
         self._policy = policy
         self._repo = repo
+        self._retention_time = retention_time
         self._timezone = timezone or ZoneInfo("Europe/Berlin")
 
     def get_offending_usage(
@@ -124,6 +132,19 @@ class RateLimiter:
                 reference_id=reference_id,
                 response_id=response_id,
             )
+
+    def do_housekeeping(self) -> None:
+        with _tracer.start_as_current_span("do_housekeeping"):
+            retention_time = self._retention_time
+            if retention_time is None:
+                _logger.warning(
+                    "Housekeeping was requested, but no retention time was set",
+                )
+                return
+
+            now = datetime.now(tz=UTC)
+            cutoff = now - retention_time
+            self._repo.drop_old_usages(until=cutoff)
 
     def close(self) -> None:
         self._repo.close()
