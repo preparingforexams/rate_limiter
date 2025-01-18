@@ -101,7 +101,7 @@ jobs:
       matrix:
         sql-dialect: [ "postgres", "sqlite" ]
         platform: [ "arm64", "amd64" ]
-    uses: preparingforexams/actions-container/.github/workflows/build-image-kaniko.yml@v5
+    uses: preparingforexams/actions-container/.github/workflows/build-image-kaniko.yml@v6
     with:
       additional-build-args: |
         DIALECT=${{ matrix.sql-dialect }}
@@ -121,7 +121,7 @@ jobs:
     strategy:
       matrix:
         sql-dialect: [ "postgres", "sqlite" ]
-    uses: preparingforexams/actions-container/.github/workflows/merge-manifests.yml@v5
+    uses: preparingforexams/actions-container/.github/workflows/merge-manifests.yml@v6
     with:
       image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       tag: ${{ needs.extract-version.outputs.version }}
