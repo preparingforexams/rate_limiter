@@ -117,7 +117,7 @@ jobs:
     strategy:
       matrix:
         sql-dialect: [ "postgres", "sqlite" ]
-    uses: preparingforexams/actions-container/.github/workflows/build-dual-image-kaniko.yml@v6
+    uses: preparingforexams/actions-container/.github/workflows/build-dual-image-kaniko.yml@v7
     with:
       additional-build-args: |
         DIALECT=${{ matrix.sql-dialect }}
