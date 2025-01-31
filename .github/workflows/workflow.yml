@@ -29,6 +29,13 @@ jobs:
       build-tool: uv
       python-version: ${{ matrix.python-version }}
 
+  post-lint:
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
+    needs: lint
+    steps:
+      - run: echo "All lints passed"
+
   test:
     strategy:
       matrix:
@@ -70,6 +77,16 @@ jobs:
       - uses: actions/checkout@v4
       - run: flyway migrate -skipCheckForUpdate
         working-directory: migrations/sqlite
+
+  post-test:
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
+    needs:
+      - test
+      - test-migrations-postgres
+      - test-migrations-sqlite
+    steps:
+      - run: echo "All tests passed"
 
   extract-version:
     runs-on: ubuntu-24.04
