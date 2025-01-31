@@ -100,32 +100,21 @@ jobs:
     strategy:
       matrix:
         sql-dialect: [ "postgres", "sqlite" ]
-        platform: [ "arm64", "amd64" ]
-    uses: preparingforexams/actions-container/.github/workflows/build-image-kaniko.yml@v6
+    uses: preparingforexams/actions-container/.github/workflows/build-dual-image-kaniko.yml@v6
     with:
       additional-build-args: |
         DIALECT=${{ matrix.sql-dialect }}
       context: 'migrations'
-      digest-artifact-name: digests-${{ matrix.sql-dialect }}
-      runner-name-build: ${{ (matrix.platform == 'arm64') && 'warp-ubuntu-2404-arm64-2x' || 'ubuntu-24.04' }}
       push-image: ${{ startsWith(github.ref, 'refs/tags/v') }}
       image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
       version: ${{ needs.extract-version.outputs.version }}
-      tag-suffix: -${{ matrix.platform }}
 
-  merge-migrations-container-image:
-    if: success() && startsWith(github.ref, 'refs/tags/v')
-    needs:
-      - extract-version
-      - build-migrations-container-image
-    strategy:
-      matrix:
-        sql-dialect: [ "postgres", "sqlite" ]
-    uses: preparingforexams/actions-container/.github/workflows/merge-manifests.yml@v6
-    with:
-      image-name: rate-limiter-migrations-${{ matrix.sql-dialect }}
-      tag: ${{ needs.extract-version.outputs.version }}
-      variant-digests: digests-${{ matrix.sql-dialect }}
+  post-build-migrations-container-image:
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
+    needs: build-migrations-container-image
+    steps:
+      - run: echo "All images built"
 
   publish-package:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v5
