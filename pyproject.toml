@@ -33,7 +33,7 @@ repository = "https://github.com/preparingforexams/rate_limiter"
 
 [dependency-groups]
 dev = [
-    "commitizen ==4.2.0",
+    "commitizen ==4.2.1",
     "coverage [toml] >=7, <8",
     "mypy ==1.14.*",
     "pre-commit >=4, <5",
