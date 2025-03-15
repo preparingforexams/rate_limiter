@@ -1,5 +1,11 @@
 # Changelog
 
+## v7.0.2 (2025-03-15)
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v11.4
+
 ## v7.0.1 (2025-01-31)
 
 ### Fix
