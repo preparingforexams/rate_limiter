@@ -97,7 +97,7 @@ jobs:
       UV_VERSION: 0.6.16
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: false
           version: ${{ env.UV_VERSION }}
