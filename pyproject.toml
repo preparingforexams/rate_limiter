@@ -39,7 +39,7 @@ dev = [
     "pre-commit >=4, <5",
     "pytest >=8, <9",
     "pytest-cov >=6, <7",
-    "ruff ==0.11.7",
+    "ruff ==0.11.8",
     "types-Deprecated >=1, <2",
 ]
 
