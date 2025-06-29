@@ -128,10 +128,17 @@ jobs:
 
   post-build-migrations-container-image:
     runs-on: ubuntu-24.04
-    if: github.event_name == 'pull_request'
+    if: "!cancelled() && github.event_name == 'pull_request'"
     needs: build-migrations-container-image
     steps:
-      - run: echo "All images built"
+      - run: |
+          if [ "true" == "${{ contains(needs.*.result, 'failure') }}" ]
+          then
+            echo "A required job failed"
+            exit 1
+          else
+            echo "All required jobs passed"
+          fi
 
   publish-package:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v5
