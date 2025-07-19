@@ -1,14 +1,15 @@
 from datetime import UTC, datetime
 
 import pytest
+import pytest_asyncio
 
 from rate_limiter import Usage
 from rate_limiter.repo import PostgresRateLimitingRepo
 
 
-@pytest.fixture
-def repo():
-    repo = PostgresRateLimitingRepo.connect(
+@pytest_asyncio.fixture
+async def repo():
+    repo = await PostgresRateLimitingRepo.connect(
         host="localhost",
         database="postgres",
         username="postgres",
@@ -17,21 +18,23 @@ def repo():
     try:
         yield repo
     finally:
-        with repo._cursor() as cursor:
-            cursor.execute("TRUNCATE TABLE usages;")
-        repo.close()
+        async with repo._cursor() as cursor:
+            await cursor.execute("TRUNCATE TABLE usages;")
+        await repo.close()
 
 
 @pytest.mark.local
-def test_no_usages(repo):
-    usages = repo.get_usages(context_id="context", user_id="user")
+@pytest.mark.asyncio
+async def test_no_usages(repo):
+    usages = await repo.get_usages(context_id="context", user_id="user")
     assert usages == []
 
 
 @pytest.mark.local
-def test_add_usage(repo):
+@pytest.mark.asyncio
+async def test_add_usage(repo):
     timestamp = datetime.now(UTC)
-    repo.add_usage(
+    await repo.add_usage(
         context_id="context",
         user_id="user",
         utc_time=timestamp,
@@ -39,7 +42,7 @@ def test_add_usage(repo):
         response_id="response",
     )
 
-    usages = repo.get_usages(context_id="context", user_id="user")
+    usages = await repo.get_usages(context_id="context", user_id="user")
     assert usages == [
         Usage(
             context_id="context",
