@@ -8,7 +8,7 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
         # TODO: this implementation should store more than one usage
         self._usage_time_by_user: dict[str, dict[str, Usage]] = {}
 
-    def get_usages(
+    async def get_usages(
         self,
         *,
         context_id: str,
@@ -18,7 +18,7 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
         usage = self._usage_time_by_user.get(context_id, {}).get(user_id)
         return [usage] if usage else []
 
-    def add_usage(
+    async def add_usage(
         self,
         *,
         context_id: str,
@@ -38,7 +38,7 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
             response_id=response_id,
         )
 
-    def drop_old_usages(self, *, until: datetime) -> None:
+    async def drop_old_usages(self, *, until: datetime) -> None:
         for context in self._usage_time_by_user.values():
             old = []
             for user_id, usage in context.items():
@@ -48,5 +48,5 @@ class InMemoryRateLimitingRepo(RateLimitingRepo):
             for user_id in old:
                 del context[user_id]
 
-    def close(self) -> None:
+    async def close(self) -> None:
         pass

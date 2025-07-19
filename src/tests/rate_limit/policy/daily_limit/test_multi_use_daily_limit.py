@@ -19,7 +19,8 @@ def policy() -> RateLimitingPolicy:
         ["tomorrow", "earlier_today", "earlier_today"],
     ],
 )
-def test_get_offending_usages_pass(
+@pytest.mark.asyncio
+async def test_get_offending_usages_pass(
     policy,
     now,
     create_usage,
@@ -28,11 +29,12 @@ def test_get_offending_usages_pass(
 ):
     times = [request.getfixturevalue(name) for name in time_fixture_names]
     usages = [create_usage(time) for time in times]
-    offending_usage = policy.get_offending_usage(at_time=now, last_usages=usages)
+    offending_usage = await policy.get_offending_usage(at_time=now, last_usages=usages)
     assert offending_usage is None
 
 
-def test_get_offending_usages_fail(
+@pytest.mark.asyncio
+async def test_get_offending_usages_fail(
     policy,
     now,
     create_usage,
@@ -42,7 +44,7 @@ def test_get_offending_usages_fail(
     later_usage = create_usage(later_today)
     earlier_usage = create_usage(earlier_today)
     earlier_usage2 = create_usage(earlier_today)
-    offending_usage = policy.get_offending_usage(
+    offending_usage = await policy.get_offending_usage(
         at_time=now,
         last_usages=[later_usage, earlier_usage2, earlier_usage],
     )

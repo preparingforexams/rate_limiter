@@ -18,7 +18,7 @@ class DailyLimitRateLimitingPolicy(RateLimitingPolicy):
     def requested_history(self) -> int:
         return self._limit
 
-    def get_offending_usage(
+    async def get_offending_usage(
         self,
         *,
         at_time: datetime,
