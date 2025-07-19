@@ -1,5 +1,22 @@
 # Changelog
 
+## v8.0.0 (2025-07-19)
+
+### BREAKING CHANGE
+
+- with the migration to asyncio, you'll have to rewrite
+all calling code.
+- dropped support for Python 3.11
+
+### Feat
+
+- convert library to asyncio
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v11.10
+- **deps**: update flyway/flyway docker tag to v11.9
+
 ## v7.0.6 (2025-05-09)
 
 ### Fix
