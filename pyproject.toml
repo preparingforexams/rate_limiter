@@ -1,5 +1,5 @@
 [project]
-requires-python = ">=3.11, <3.14"
+requires-python = ">=3.12, <3.14"
 name = "prep-rate-limiter"
 description = "Provides scaffolding for rate limited features"
 version = "7.0.6"
