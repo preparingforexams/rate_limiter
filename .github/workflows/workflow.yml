@@ -94,7 +94,7 @@ jobs:
       version: ${{ steps.extract.outputs.version }}
     env:
       # renovate: datasource=pypi depName=uv versioning=semver-coerced
-      UV_VERSION: 0.8.1
+      UV_VERSION: 0.8.2
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
