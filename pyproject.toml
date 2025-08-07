@@ -40,7 +40,7 @@ dev = [
     "pytest >=8, <9",
     "pytest-asyncio ==1.1.0",
     "pytest-cov >=6, <7",
-    "ruff ==0.12.7",
+    "ruff ==0.12.8",
     "types-Deprecated >=1, <2",
 ]
 
