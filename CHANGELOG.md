@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.0.1 (2025-08-15)
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v11.11
+
 ## v8.0.0 (2025-07-19)
 
 ### BREAKING CHANGE
