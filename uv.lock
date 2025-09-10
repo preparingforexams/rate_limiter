@@ -62,13 +62,14 @@ wheels = [
 
 [[package]]
 name = "commitizen"
-version = "4.8.4"
+version = "4.9.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "argcomplete" },
     { name = "charset-normalizer" },
     { name = "colorama" },
     { name = "decli" },
+    { name = "deprecated" },
     { name = "jinja2" },
     { name = "packaging" },
     { name = "prompt-toolkit" },
@@ -77,9 +78,9 @@ dependencies = [
     { name = "termcolor" },
     { name = "tomlkit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/b8/813c896b08777d510f78ddc5122fd5f6e6ac6dd18dfd355d083cfa369f3b/commitizen-4.8.4.tar.gz", hash = "sha256:082dd895697ed548a8388e9e9ec69378089860402fbb02b464acd0a306130fca", size = 56549, upload-time = "2025-09-05T16:50:01.414Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/77/19/927ac5b0eabb9451e2d5bb45b30813915c9a1260713b5b68eeb31358ea23/commitizen-4.9.1.tar.gz", hash = "sha256:b076b24657718f7a35b1068f2083bd39b4065d250164a1398d1dac235c51753b", size = 56610, upload-time = "2025-09-10T14:19:33.746Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/58/26/ffe8a58aae0ce9094fd1eb5dae902560aafa7049c359eaa376024697b21e/commitizen-4.8.4-py3-none-any.whl", hash = "sha256:8b9fe86a9ec4575765c1637882e8523a91a80bc58d3c1a6b5a62378053b2a8cf", size = 80477, upload-time = "2025-09-05T16:49:59.695Z" },
+    { url = "https://files.pythonhosted.org/packages/cf/49/577035b841442fe031b017027c3d99278b46104d227f0353c69dbbe55148/commitizen-4.9.1-py3-none-any.whl", hash = "sha256:4241b2ecae97b8109af8e587c36bc3b805a09b9a311084d159098e12d6ead497", size = 80624, upload-time = "2025-09-10T14:19:32.102Z" },
 ]
 
 [[package]]
@@ -472,7 +473,7 @@ provides-extras = ["opentelemetry-postgres", "opentelemetry-sqlite3", "postgres"
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "commitizen", specifier = "==4.8.4" },
+    { name = "commitizen", specifier = "==4.9.1" },
     { name = "coverage", extras = ["toml"], specifier = ">=7,<8" },
     { name = "mypy", specifier = "==1.17.*" },
     { name = "pre-commit", specifier = ">=4,<5" },
