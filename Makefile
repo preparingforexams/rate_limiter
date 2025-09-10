@@ -29,5 +29,3 @@ migrations: migrations-postgres migrations-sqlite
 .PHONY: release
 release:
 	uv run cz bump
-	git push
-	git push --tags
