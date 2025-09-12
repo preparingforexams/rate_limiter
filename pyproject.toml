@@ -35,7 +35,7 @@ repository = "https://github.com/preparingforexams/rate_limiter"
 dev = [
     "commitizen ==4.9.1",
     "coverage [toml] >=7, <8",
-    "mypy ==1.17.*",
+    "mypy ==1.18.*",
     "pre-commit >=4, <5",
     "pytest >=8, <9",
     "pytest-asyncio ==1.1.0",
