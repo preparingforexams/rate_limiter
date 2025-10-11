@@ -1,5 +1,16 @@
 # Changelog
 
+## v8.1.0 (2025-10-11)
+
+### Feat
+
+- support Python 3.14
+
+### Fix
+
+- **deps**: update flyway/flyway docker tag to v11.14
+- **deps**: update flyway/flyway docker tag to v11.13
+
 ## v8.0.2 (2025-09-10)
 
 ### Fix
