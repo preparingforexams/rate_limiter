@@ -6,6 +6,9 @@ on:
       - v**
   pull_request: { }
 
+permissions:
+  contents: read
+
 jobs:
   required-meta:
     permissions:
@@ -118,6 +121,9 @@ jobs:
       matrix:
         sql-dialect: [ "postgres", "sqlite" ]
     uses: preparingforexams/actions-container/.github/workflows/build-dual-image-kaniko.yml@v7
+    permissions:
+      contents: read
+      packages: write
     with:
       additional-build-args: |
         DIALECT=${{ matrix.sql-dialect }}
