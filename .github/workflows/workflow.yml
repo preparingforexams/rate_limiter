@@ -55,7 +55,7 @@ jobs:
   test-migrations-postgres:
     strategy:
       matrix:
-        postgres-version: [ "14", "15", "16" ]
+        postgres-version: [ "14", "15", "16", "17", "18" ]
     runs-on: ubuntu-24.04
     container: flyway/flyway:11.14
     services:
