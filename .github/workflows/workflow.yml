@@ -33,10 +33,19 @@ jobs:
       build-tool: uv
       python-version: ${{ matrix.python-version }}
 
+  lint-tests:
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v6
+    with:
+      build-tool: uv
+      context-path: "tests/"
+      python-version: '3.14'
+
   post-lint:
     runs-on: ubuntu-24.04
     if: github.event_name == 'pull_request'
-    needs: lint
+    needs:
+      - lint
+      - lint-tests
     steps:
       - run: echo "All lints passed"
 
@@ -116,6 +125,7 @@ jobs:
     needs:
       - extract-version
       - lint
+      - lint-tests
       - test
       - test-migrations-postgres
       - test-migrations-sqlite
@@ -152,6 +162,7 @@ jobs:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v6
     needs:
       - lint
+      - lint-tests
       - test
       - test-migrations-postgres
       - test-migrations-sqlite
