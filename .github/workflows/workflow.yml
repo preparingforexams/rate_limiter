@@ -102,24 +102,23 @@ jobs:
     steps:
       - run: echo "All tests passed"
 
+  bump:
+    uses: BlindfoldedSurgery/actions-releases/.github/workflows/commitizen-bump.yml@v4
+    needs:
+      - lint
+      - lint-tests
+      - test
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_PR_TOKEN }}
+    with:
+      build-tool: uv
+      python-version: '3.14'
+
   extract-version:
-    runs-on: ubuntu-24.04
-    outputs:
-      version: ${{ steps.extract.outputs.version }}
-    env:
-      # renovate: datasource=pypi depName=uv versioning=semver-coerced
-      UV_VERSION: 0.9.5
-    steps:
-      - uses: actions/checkout@v5
-      - uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: false
-          version: ${{ env.UV_VERSION }}
-      - name: Read version from pyproject.toml
-        id: extract
-        run: |
-          VERSION=$(uvx --from=toml-cli toml get --toml-path pyproject.toml project.version)
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+    uses: BlindfoldedSurgery/actions-releases/.github/workflows/commitizen-version.yml@v4
+    with:
+      build-tool: uv
+      python-version: '3.14'
 
   build-migrations-container-image:
     needs:
