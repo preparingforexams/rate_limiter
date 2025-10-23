@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.1.1 (2025-10-23)
+
+### Fix
+
+- drop Deprecated dependency
+
 ## v8.1.0 (2025-10-11)
 
 ### Feat
