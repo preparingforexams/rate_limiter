@@ -110,6 +110,9 @@ jobs:
       - test
     secrets:
       GH_TOKEN: ${{ secrets.GH_PR_TOKEN }}
+    permissions:
+      contents: write
+      pull-requests: write
     with:
       build-tool: uv
       python-version: '3.14'
