@@ -14,7 +14,6 @@ classifiers = [
 ]
 
 dependencies = [
-    "Deprecated >=1, <2",
     "opentelemetry-api >=1.22, <2",
     "tzdata",
 ]
