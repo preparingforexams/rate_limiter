@@ -10,8 +10,10 @@
       "enabled": false
     },
     {
-      "matchPackageNames": [
-        "flyway/flyway"
+      "matchDepNames": [
+        "flyway",
+        "flyway/flyway",
+        "docker.io/flyway/flyway"
       ],
       "matchUpdateTypes": [
         "minor"
@@ -20,7 +22,9 @@
     },
     {
       "matchPackageNames": [
-        "flyway/flyway"
+        "flyway",
+        "flyway/flyway",
+        "docker.io/flyway/flyway"
       ],
       "matchUpdateTypes": [
         "major"
