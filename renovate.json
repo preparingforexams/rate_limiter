@@ -10,6 +10,7 @@
       "enabled": false
     },
     {
+      "groupName": "flyway",
       "matchDepNames": [
         "flyway",
         "flyway/flyway",
@@ -21,6 +22,7 @@
       "semanticCommitType": "fix"
     },
     {
+      "groupName": "flyway",
       "matchPackageNames": [
         "flyway",
         "flyway/flyway",
