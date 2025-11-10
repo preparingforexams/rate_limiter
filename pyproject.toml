@@ -67,12 +67,13 @@ tag_format = "v$major.$minor.$patch"
 changelog_incremental = true
 update_changelog_on_bump = true
 
-[tool.pytest.ini_options]
-markers = [
-    "local",
-]
+[tool.pytest]
+strict = true
 addopts = [
     "--import-mode=importlib",
+]
+markers = [
+    "local",
 ]
 
 [tool.ruff.lint]
