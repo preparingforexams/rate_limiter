@@ -31,13 +31,13 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [ "3.14", "3.13", "3.12" ]
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v6
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v7
     with:
       build-tool: uv
       python-version: ${{ matrix.python-version }}
 
   lint-tests:
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v6
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v7
     with:
       build-tool: uv
       context-path: "tests/"
@@ -57,7 +57,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [ "3.14", "3.13", "3.12" ]
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v6
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v7
     with:
       build-tool: uv
       python-version: ${{ matrix.python-version }}
@@ -164,7 +164,7 @@ jobs:
           fi
 
   publish-package:
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v6
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/publish-package.yml@v7
     needs:
       - lint
       - lint-tests
