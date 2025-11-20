@@ -79,7 +79,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: flyway migrate -skipCheckForUpdate
         working-directory: migrations/postgres
         env:
@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-24.04
     container: flyway/flyway:11.17
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: flyway migrate -skipCheckForUpdate
         working-directory: migrations/sqlite
 
