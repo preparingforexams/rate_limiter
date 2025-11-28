@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.1.5 (2025-11-28)
+
+### Fix
+
+- **deps**: update flyway to v11.18
+
 ## v8.1.4 (2025-11-11)
 
 ### Fix
