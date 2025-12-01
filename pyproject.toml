@@ -27,7 +27,7 @@ opentelemetry-sqlite3 = [
 ]
 postgres = [
     "psycopg [binary] ==3.2.*",
-    "psycopg_pool ==3.2.*",
+    "psycopg_pool ==3.3.*",
 ]
 
 [project.urls]
