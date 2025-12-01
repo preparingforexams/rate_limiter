@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.1.6 (2025-12-01)
+
+### Fix
+
+- **deps**: update dependency psycopg to ==3.3.*
+
 ## v8.1.5 (2025-11-28)
 
 ### Fix
