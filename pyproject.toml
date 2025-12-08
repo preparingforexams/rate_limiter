@@ -2,7 +2,7 @@
 requires-python = ">=3.12, <3.15"
 name = "prep-rate-limiter"
 description = "Provides scaffolding for rate limited features"
-version = "8.1.6"
+version = "8.1.7"
 authors = [{ name = "Björn Petersen", email = "pypi@bjoernpetersen.net" }]
 readme = "README.md"
 license = "MIT"
